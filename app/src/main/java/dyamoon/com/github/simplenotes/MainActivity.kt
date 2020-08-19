@@ -13,30 +13,28 @@ import dyamoon.com.github.simplenotes.utils.APP_ACTIVITY
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mBinding : ActivityMainBinding
-     lateinit var mToolbar : Toolbar
+    lateinit var mToolbar : Toolbar
 
 
     override fun onStart() {
-        APP_ACTIVITY = this
-        AppDrawer().create()
         super.onStart()
+        AppDrawer().create()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        APP_ACTIVITY = this
         initFields()
 
 
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.data_container, NoteFragment())
+        APP_ACTIVITY.supportFragmentManager.beginTransaction()
+            .add(R.id.data_container, NoteListFragment())
             .commit()
 
     }
 
     private fun initFields() {
-        mBinding = ActivityMainBinding.inflate(layoutInflater)
+     mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         mToolbar = mBinding.mainToolbar
         setSupportActionBar(mToolbar)
